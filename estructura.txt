@@ -1,0 +1,66 @@
+Listado de rutas de carpetas
+El n£mero de serie del volumen es 8057-0769
+C:.
+|   .gitattributes
+|   .gitignore
+|   estructura.txt
+|   HELP.md
+|   mvnw
+|   mvnw.cmd
+|   pom.xml
+|   
++---.idea
+|       .gitignore
+|       compiler.xml
+|       encodings.xml
+|       jarRepositories.xml
+|       misc.xml
+|       vcs.xml
+|       
++---.mvn
+|   \---wrapper
+|           maven-wrapper.properties
+|           
++---src
+|   +---main
+|   |   +---java
+|   |   |   \---com
+|   |   |       \---backend_gimnasio
+|   |   |           \---backend_gimnasio
+|   |   |               |   BackendGimnasioApplication.java
+|   |   |               |   
+|   |   |               +---controllers
+|   |   |               +---model
+|   |   |               |   +---dtos
+|   |   |               |   +---entities
+|   |   |               |   \---mappers
+|   |   |               +---repositories
+|   |   |               +---services
+|   |   |               |   +---impl
+|   |   |               |   \---interfaces
+|   |   |               \---utils
+|   |   \---resources
+|   |       |   application.properties
+|   |       |   
+|   |       +---db
+|   |       |   \---changelog
+|   |       +---static
+|   |       \---templates
+|   \---test
+|       \---java
+|           \---com
+|               \---backend_gimnasio
+|                   \---backend_gimnasio
+|                           BackendGimnasioApplicationTests.java
+|                           
+\---target
+    +---classes
+    |   |   application.properties
+    |   |   
+    |   \---com
+    |       \---backend_gimnasio
+    |           \---backend_gimnasio
+    |                   BackendGimnasioApplication.class
+    |                   
+    \---generated-sources
+        \---annotations
