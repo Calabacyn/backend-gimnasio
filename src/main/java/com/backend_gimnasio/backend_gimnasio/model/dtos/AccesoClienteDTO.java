@@ -18,11 +18,11 @@ public class AccesoClienteDTO {
     private Long idUsuario;
     private String estado; // 'activo' o 'inactivo'
 
-    // Constructor vacío
+
     public AccesoClienteDTO() {
     }
 
-    // Constructor con todos los campos
+
     public AccesoClienteDTO(Long idAcceso, Long idCliente, LocalDate fecha,
                             LocalTime horaEntrada, LocalTime horaSalida, Long idUsuario, String estado) {
         this.idAcceso = idAcceso;
