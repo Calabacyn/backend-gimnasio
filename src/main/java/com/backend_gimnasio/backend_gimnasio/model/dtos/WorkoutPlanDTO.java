@@ -16,14 +16,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkoutPlanDTO {
-
     private Long id;
     private Long clientId;
+    private String clientNombre;     // opcional
     private String title;
     private String link;
     private String description;
     private LocalDate creationDate;
     private Long membershipId;
-    private String registeredBy;
+    private Long registeredBy;       // id del usuario staff
+    private String registeredByName; // opcional
     private LocalDate expirationDate;
 }
+

@@ -1,5 +1,5 @@
 Listado de rutas de carpetas
-El n£mero de serie del volumen es 8057-0769
+El nï¿½mero de serie del volumen es 8057-0769
 C:.
 |   .gitattributes
 |   .gitignore
@@ -16,6 +16,7 @@ C:.
 |       jarRepositories.xml
 |       misc.xml
 |       vcs.xml
+|       workspace.xml
 |       
 +---.mvn
 |   \---wrapper
@@ -30,14 +31,45 @@ C:.
 |   |   |               |   BackendGimnasioApplication.java
 |   |   |               |   
 |   |   |               +---controllers
+|   |   |               |       AccesoClienteController.java
+|   |   |               |       CategoriaEgresoController.java
+|   |   |               |       CategoriaIngresoController.java
+|   |   |               |       CategoriaProductoController.java
+|   |   |               |       ClienteController.java
+|   |   |               |       MembresiaController.java
+|   |   |               |       PlanificacionController.java
+|   |   |               |       ProductoController.java
+|   |   |               |       ProveedorController.java
+|   |   |               |       
 |   |   |               +---model
 |   |   |               |   +---dtos
+|   |   |               |   |       ClientAccessDTO.java
+|   |   |               |   |       ClientDTO.java
+|   |   |               |   |       ExpenseCategoryDTO.java
+|   |   |               |   |       ExpenseDTO.java
+|   |   |               |   |       IncomeCategoryDTO.java
+|   |   |               |   |       IncomeDTO.java
+|   |   |               |   |       InvoiceDTO.java
+|   |   |               |   |       InvoiceItemDTO.java
+|   |   |               |   |       MembershipDTO.java
+|   |   |               |   |       MembershipPaymentDTO.java
+|   |   |               |   |       ProductCategoryDTO.java
+|   |   |               |   |       ProductDTO.java
+|   |   |               |   |       PurchaseDTO.java
+|   |   |               |   |       SupplierDTO.java
+|   |   |               |   |       UserDTO.java
+|   |   |               |   |       WorkoutPlanDTO.java
+|   |   |               |   |       
 |   |   |               |   +---entities
 |   |   |               |   \---mappers
 |   |   |               +---repositories
 |   |   |               +---services
 |   |   |               |   +---impl
+|   |   |               |   |       WorkoutPlanServiceImpl.java
+|   |   |               |   |       
 |   |   |               |   \---interfaces
+|   |   |               |           IWorkoutPlanService.java
+|   |   |               |           
 |   |   |               \---utils
 |   |   \---resources
 |   |       |   application.properties
@@ -60,7 +92,44 @@ C:.
     |   \---com
     |       \---backend_gimnasio
     |           \---backend_gimnasio
-    |                   BackendGimnasioApplication.class
-    |                   
+    |               |   BackendGimnasioApplication.class
+    |               |   
+    |               +---controllers
+    |               |       AccesoClienteController.class
+    |               |       CategoriaEgresoController.class
+    |               |       CategoriaIngresoController.class
+    |               |       CategoriaProductoController.class
+    |               |       ClienteController.class
+    |               |       MembresiaController.class
+    |               |       PlanificacionController.class
+    |               |       ProductoController.class
+    |               |       ProveedorController.class
+    |               |       
+    |               +---model
+    |               |   \---dtos
+    |               |           ClientAccessDTO.class
+    |               |           ClientDTO.class
+    |               |           ExpenseCategoryDTO.class
+    |               |           ExpenseDTO.class
+    |               |           IncomeCategoryDTO.class
+    |               |           IncomeDTO.class
+    |               |           InvoiceDTO.class
+    |               |           InvoiceItemDTO.class
+    |               |           MembershipDTO.class
+    |               |           MembershipPaymentDTO.class
+    |               |           ProductCategoryDTO.class
+    |               |           ProductDTO.class
+    |               |           PurchaseDTO.class
+    |               |           SupplierDTO.class
+    |               |           UserDTO.class
+    |               |           WorkoutPlanDTO.class
+    |               |           
+    |               \---services
+    |                   +---impl
+    |                   |       WorkoutPlanServiceImpl.class
+    |                   |       
+    |                   \---interfaces
+    |                           IWorkoutPlanService.class
+    |                           
     \---generated-sources
         \---annotations
