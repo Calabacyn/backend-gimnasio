@@ -20,9 +20,10 @@ public class WorkoutPlanDTO {
     private Long id;
     private Long clientId;
     private String title;
+    private String link;
     private String description;
     private LocalDate creationDate;
     private Long membershipId;
-    private Long userId;
+    private String registeredBy;
     private LocalDate expirationDate;
 }
