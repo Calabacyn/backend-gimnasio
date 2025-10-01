@@ -2,7 +2,9 @@ package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.SupplierDTO;
 import com.backend_gimnasio.backend_gimnasio.model.entities.Supplier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SupplierMapper {
 
     public static SupplierDTO toDto(Supplier supplier) {

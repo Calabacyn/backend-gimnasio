@@ -3,11 +3,13 @@ package com.backend_gimnasio.backend_gimnasio.model.mappers;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
 import com.backend_gimnasio.backend_gimnasio.model.entities.Role;
 import com.backend_gimnasio.backend_gimnasio.model.entities.User;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+@Component
 public class UserMapper {
 
     public static UserDTO toDTO(User user) {

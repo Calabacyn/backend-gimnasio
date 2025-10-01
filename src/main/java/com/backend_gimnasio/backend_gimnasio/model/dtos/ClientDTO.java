@@ -38,7 +38,7 @@ public class ClientDTO {
     private LocalDate birthDate;
 
     private LocalDate registrationDate;
-    
+
     @NotBlank
     private Long registeredById;
 
