@@ -37,12 +37,12 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Relación con roles
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_roles",  // tabla intermedia
-            joinColumns = @JoinColumn(name = "user_id"),   // FK a users
-            inverseJoinColumns = @JoinColumn(name = "role_id") // FK a roles
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
 }

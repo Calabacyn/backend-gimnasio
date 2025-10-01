@@ -1,5 +1,6 @@
 package com.backend_gimnasio.backend_gimnasio.services.impl;
 
+import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
 import com.backend_gimnasio.backend_gimnasio.model.entities.User;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.UserMapper;
@@ -55,13 +56,13 @@ public class UserServiceImpl implements IUserService {
                     user.setUpdatedAt(LocalDateTime.now());
                     return UserMapper.toDTO(userRepository.save(user));
                 })
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found: "+id));
+                .orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
     }
 

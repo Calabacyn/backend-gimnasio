@@ -20,7 +20,7 @@ public class WorkoutPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Client who owns the plan
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
@@ -31,7 +31,7 @@ public class WorkoutPlan {
     private LocalDate creationDate;
     private Long membershipId;
 
-    // User/staff who registered the plan
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)
     private User registeredBy;

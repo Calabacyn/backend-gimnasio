@@ -1,5 +1,6 @@
 package com.backend_gimnasio.backend_gimnasio.controllers;
 
+import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
 import com.backend_gimnasio.backend_gimnasio.services.interfaces.IUserService;
 import jakarta.validation.Valid;
@@ -30,9 +31,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        UserDTO user = userService.getUserById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return ResponseEntity.ok(user);
     }
 
 

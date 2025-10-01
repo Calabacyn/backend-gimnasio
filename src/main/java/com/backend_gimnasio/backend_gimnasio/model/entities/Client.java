@@ -27,7 +27,7 @@ public class Client {
     private String email;
 
     @Column(name = "national_id", nullable = false, unique = true, length = 20)
-    private String nationalId;   // antes "dni"
+    private String nationalId;
 
     @Column(length = 20)
     private String phone;
@@ -38,7 +38,7 @@ public class Client {
     @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
 
-    // Usuario/staff que registró al cliente
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)
     private User registeredBy;

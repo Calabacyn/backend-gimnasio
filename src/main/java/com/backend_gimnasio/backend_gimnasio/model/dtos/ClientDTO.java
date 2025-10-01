@@ -21,9 +21,10 @@ public class ClientDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String nationalId;   // previously "dni"
+    private String nationalId;
     private String phone;
     private LocalDate birthDate;
     private LocalDate registrationDate;
-    private String registeredBy;
+    private Long registeredById;
+    private String registeredByName;
 }

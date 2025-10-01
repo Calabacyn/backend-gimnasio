@@ -39,7 +39,12 @@ C:.
 |   |   |               |       MembresiaController.java
 |   |   |               |       ProductoController.java
 |   |   |               |       ProveedorController.java
+|   |   |               |       UserController.java
 |   |   |               |       WorkoutPlanController.java
+|   |   |               |       
+|   |   |               +---exceptions
+|   |   |               |       GlobalExceptionHandler.java
+|   |   |               |       UserNotFoundException.java
 |   |   |               |       
 |   |   |               +---model
 |   |   |               |   +---dtos
@@ -67,16 +72,20 @@ C:.
 |   |   |               |   |       WorkoutPlan.java
 |   |   |               |   |       
 |   |   |               |   \---mappers
+|   |   |               |           UserMapper.java
 |   |   |               |           WorkoutPlanMapper.java
 |   |   |               |           
 |   |   |               +---repositories
+|   |   |               |       UserRepository.java
 |   |   |               |       WorkoutPlanRepository.java
 |   |   |               |       
 |   |   |               +---services
 |   |   |               |   +---impl
+|   |   |               |   |       UserServiceImpl.java
 |   |   |               |   |       WorkoutPlanServiceImpl.java
 |   |   |               |   |       
 |   |   |               |   \---interfaces
+|   |   |               |           IUserService.java
 |   |   |               |           IWorkoutPlanService.java
 |   |   |               |           
 |   |   |               \---utils
@@ -95,6 +104,9 @@ C:.
 |                           BackendGimnasioApplicationTests.java
 |                           
 \---target
+    |   backend-gimnasio-0.0.1-SNAPSHOT.jar
+    |   backend-gimnasio-0.0.1-SNAPSHOT.jar.original
+    |   
     +---classes
     |   |   application.properties
     |   |   
@@ -112,7 +124,12 @@ C:.
     |               |       MembresiaController.class
     |               |       ProductoController.class
     |               |       ProveedorController.class
+    |               |       UserController.class
     |               |       WorkoutPlanController.class
+    |               |       
+    |               +---exceptions
+    |               |       GlobalExceptionHandler.class
+    |               |       UserNotFoundException.class
     |               |       
     |               +---model
     |               |   +---dtos
@@ -140,17 +157,48 @@ C:.
     |               |   |       WorkoutPlan.class
     |               |   |       
     |               |   \---mappers
+    |               |           UserMapper.class
     |               |           WorkoutPlanMapper.class
     |               |           
     |               +---repositories
+    |               |       UserRepository.class
     |               |       WorkoutPlanRepository.class
     |               |       
     |               \---services
     |                   +---impl
+    |                   |       UserServiceImpl.class
     |                   |       WorkoutPlanServiceImpl.class
     |                   |       
     |                   \---interfaces
+    |                           IUserService.class
     |                           IWorkoutPlanService.class
     |                           
-    \---generated-sources
-        \---annotations
+    +---generated-sources
+    |   \---annotations
+    +---generated-test-sources
+    |   \---test-annotations
+    +---maven-archiver
+    |       pom.properties
+    |       
+    +---maven-status
+    |   \---maven-compiler-plugin
+    |       +---compile
+    |       |   \---default-compile
+    |       |           createdFiles.lst
+    |       |           inputFiles.lst
+    |       |           
+    |       \---testCompile
+    |           \---default-testCompile
+    |                   createdFiles.lst
+    |                   inputFiles.lst
+    |                   
+    +---surefire-reports
+    |       com.backend_gimnasio.backend_gimnasio.BackendGimnasioApplicationTests.txt
+    |       TEST-com.backend_gimnasio.backend_gimnasio.BackendGimnasioApplicationTests.xml
+    |       
+    \---test-classes
+        \---com
+            \---backend_gimnasio
+                \---backend_gimnasio
+                        BackendGimnasioApplicationTests.class
+                        
