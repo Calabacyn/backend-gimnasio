@@ -23,7 +23,7 @@ public class UserMapper {
                 user.getId(),
                 user.getUserName(),
                 user.getEmail(),
-                null, // Nunca exponer password
+                null,
                 roleNames,
                 user.getStatus(),
                 user.getCreatedAt(),
@@ -42,7 +42,7 @@ public class UserMapper {
         user.setStatus(dto.getStatus());
         user.setCreatedAt(dto.getCreatedAt());
         user.setUpdatedAt(dto.getUpdatedAt());
-        user.setRoles(new HashSet<>()); // por ahora vacío o manejar desde otro mapper
+        user.setRoles(new HashSet<>());
         return user;
     }
 }
