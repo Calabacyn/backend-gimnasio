@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 
@@ -25,4 +26,6 @@ public class UserDTO {
     private String status;        // 'active' or 'inactive'
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+
 }

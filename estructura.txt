@@ -1,5 +1,5 @@
 Listado de rutas de carpetas
-El nï¿½mero de serie del volumen es 8057-0769
+El n£mero de serie del volumen es 8057-0769
 C:.
 |   .gitattributes
 |   .gitignore
@@ -37,9 +37,9 @@ C:.
 |   |   |               |       CategoriaProductoController.java
 |   |   |               |       ClienteController.java
 |   |   |               |       MembresiaController.java
-|   |   |               |       PlanificacionController.java
 |   |   |               |       ProductoController.java
 |   |   |               |       ProveedorController.java
+|   |   |               |       WorkoutPlanController.java
 |   |   |               |       
 |   |   |               +---model
 |   |   |               |   +---dtos
@@ -61,8 +61,17 @@ C:.
 |   |   |               |   |       WorkoutPlanDTO.java
 |   |   |               |   |       
 |   |   |               |   +---entities
+|   |   |               |   |       Client.java
+|   |   |               |   |       Role.java
+|   |   |               |   |       User.java
+|   |   |               |   |       WorkoutPlan.java
+|   |   |               |   |       
 |   |   |               |   \---mappers
+|   |   |               |           WorkoutPlanMapper.java
+|   |   |               |           
 |   |   |               +---repositories
+|   |   |               |       WorkoutPlanRepository.java
+|   |   |               |       
 |   |   |               +---services
 |   |   |               |   +---impl
 |   |   |               |   |       WorkoutPlanServiceImpl.java
@@ -101,29 +110,41 @@ C:.
     |               |       CategoriaProductoController.class
     |               |       ClienteController.class
     |               |       MembresiaController.class
-    |               |       PlanificacionController.class
     |               |       ProductoController.class
     |               |       ProveedorController.class
+    |               |       WorkoutPlanController.class
     |               |       
     |               +---model
-    |               |   \---dtos
-    |               |           ClientAccessDTO.class
-    |               |           ClientDTO.class
-    |               |           ExpenseCategoryDTO.class
-    |               |           ExpenseDTO.class
-    |               |           IncomeCategoryDTO.class
-    |               |           IncomeDTO.class
-    |               |           InvoiceDTO.class
-    |               |           InvoiceItemDTO.class
-    |               |           MembershipDTO.class
-    |               |           MembershipPaymentDTO.class
-    |               |           ProductCategoryDTO.class
-    |               |           ProductDTO.class
-    |               |           PurchaseDTO.class
-    |               |           SupplierDTO.class
-    |               |           UserDTO.class
-    |               |           WorkoutPlanDTO.class
+    |               |   +---dtos
+    |               |   |       ClientAccessDTO.class
+    |               |   |       ClientDTO.class
+    |               |   |       ExpenseCategoryDTO.class
+    |               |   |       ExpenseDTO.class
+    |               |   |       IncomeCategoryDTO.class
+    |               |   |       IncomeDTO.class
+    |               |   |       InvoiceDTO.class
+    |               |   |       InvoiceItemDTO.class
+    |               |   |       MembershipDTO.class
+    |               |   |       MembershipPaymentDTO.class
+    |               |   |       ProductCategoryDTO.class
+    |               |   |       ProductDTO.class
+    |               |   |       PurchaseDTO.class
+    |               |   |       SupplierDTO.class
+    |               |   |       UserDTO.class
+    |               |   |       WorkoutPlanDTO.class
+    |               |   |       
+    |               |   +---entities
+    |               |   |       Client.class
+    |               |   |       Role.class
+    |               |   |       User.class
+    |               |   |       WorkoutPlan.class
+    |               |   |       
+    |               |   \---mappers
+    |               |           WorkoutPlanMapper.class
     |               |           
+    |               +---repositories
+    |               |       WorkoutPlanRepository.class
+    |               |       
     |               \---services
     |                   +---impl
     |                   |       WorkoutPlanServiceImpl.class
