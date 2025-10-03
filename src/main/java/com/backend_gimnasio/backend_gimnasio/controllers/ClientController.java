@@ -23,40 +23,36 @@ public class ClientController {
     }
 
     @GetMapping
-    public List<ClientDTO> getAllClients() {
-        return clientService.getAllClients();
+    public List<ClientDTO> getAll() {
+        return clientService.getAll();
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<ClientDTO> getClientById(@PathVariable Long id) {
-        ClientDTO client = clientService.getClientById(id)
+    public ResponseEntity<ClientDTO> getBy(@PathVariable Long id) {
+        ClientDTO client = clientService.getBy(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         return ResponseEntity.ok(client);
     }
 
+
     @PostMapping
-    public ResponseEntity<ClientDTO> createClient(@RequestBody @Valid ClientDTO clientDTO) {
-        ClientDTO createdClient = clientService.createClient(clientDTO);
+    public ResponseEntity<ClientDTO> create(@RequestBody @Valid ClientDTO client) {
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdClient.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(createdClient);
+        return clientService.create(client);
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id,
-                                                  @RequestBody @Valid ClientDTO clientDTO) {
-        ClientDTO updatedClient = clientService.updateClient(id, clientDTO);
-        return ResponseEntity.ok(updatedClient);
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id,
+                                            @RequestBody @Valid ClientDTO client) {
+        ClientDTO updated = clientService.update(id, client);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteClient(@PathVariable Long id) {
-        clientService.deleteClient(id);
+    public void delete(@PathVariable Long id) {
+        clientService.delete(id);
     }
 }
