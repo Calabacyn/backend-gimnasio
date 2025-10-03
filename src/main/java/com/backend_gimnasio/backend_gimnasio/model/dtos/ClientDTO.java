@@ -1,10 +1,9 @@
 package com.backend_gimnasio.backend_gimnasio.model.dtos;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
+import jdk.jshell.Snippet;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,10 +11,10 @@ import java.time.LocalDate;
  * DTO for transferring client information.
  * Represents the main personal and registration data of a client.
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ClientDTO {
 
 
@@ -39,8 +38,10 @@ public class ClientDTO {
 
     private LocalDate registrationDate;
 
-    @NotBlank
+    @NotNull
     private Long registeredById;
 
     private String registeredByName;
+
+
 }

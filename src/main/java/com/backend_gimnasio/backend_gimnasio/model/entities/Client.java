@@ -1,5 +1,6 @@
 package com.backend_gimnasio.backend_gimnasio.model.entities;
 
+import com.backend_gimnasio.backend_gimnasio.model.dtos.ClientDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,4 +43,22 @@ public class Client {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)
     private User registeredBy;
+
+
+
+    public void updateFromDto(ClientDTO dto, User registeredBy) {
+        if (dto == null) return;
+
+        if (dto.getFirstName() != null) this.setFirstName(dto.getFirstName());
+        if (dto.getLastName() != null) this.setLastName(dto.getLastName());
+        if (dto.getEmail() != null) this.setEmail(dto.getEmail());
+        if (dto.getNationalId() != null) this.setNationalId(dto.getNationalId());
+        if (dto.getPhone() != null) this.setPhone(dto.getPhone());
+        if (dto.getBirthDate() != null) this.setBirthDate(dto.getBirthDate());
+        if (dto.getRegistrationDate() != null) this.setRegistrationDate(dto.getRegistrationDate());
+        if (registeredBy != null && registeredBy.getId() != null) {
+            this.setRegisteredBy(registeredBy);
+        }
+    }
+
 }

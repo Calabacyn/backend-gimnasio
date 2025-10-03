@@ -11,23 +11,20 @@ public class ClientMapper {
     public ClientDTO toDto(Client entity) {
         if (entity == null) return null;
 
-        ClientDTO dto = new ClientDTO();
-        dto.setId(entity.getId());
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
-        dto.setEmail(entity.getEmail());
-        dto.setNationalId(entity.getNationalId());
-        dto.setPhone(entity.getPhone());
-        dto.setBirthDate(entity.getBirthDate());
-        dto.setRegistrationDate(entity.getRegistrationDate());
-
-        if (entity.getRegisteredBy() != null) {
-            dto.setRegisteredById(entity.getRegisteredBy().getId());
-            dto.setRegisteredByName(entity.getRegisteredBy().getUserName());
-        }
-
-        return dto;
+        return ClientDTO.builder()
+                .id(entity.getId())
+                .firstName(entity.getFirstName())
+                .lastName(entity.getLastName())
+                .email(entity.getEmail())
+                .nationalId(entity.getNationalId())
+                .phone(entity.getPhone())
+                .birthDate(entity.getBirthDate())
+                .registrationDate(entity.getRegistrationDate())
+                .registeredById(entity.getRegisteredBy() != null ? entity.getRegisteredBy().getId() : null)
+                .registeredByName(entity.getRegisteredBy() != null ? entity.getRegisteredBy().getUserName() : null)
+                .build();
     }
+
 
     public Client toEntity(ClientDTO dto, User registeredBy) {
         if (dto == null) return null;
@@ -46,18 +43,5 @@ public class ClientMapper {
         return entity;
     }
 
-    public void updateEntityFromDto(ClientDTO dto, Client entity, User registeredBy) {
-        if (dto == null || entity == null) return;
 
-        if (dto.getFirstName() != null) entity.setFirstName(dto.getFirstName());
-        if (dto.getLastName() != null) entity.setLastName(dto.getLastName());
-        if (dto.getEmail() != null) entity.setEmail(dto.getEmail());
-        if (dto.getNationalId() != null) entity.setNationalId(dto.getNationalId());
-        if (dto.getPhone() != null) entity.setPhone(dto.getPhone());
-        if (dto.getBirthDate() != null) entity.setBirthDate(dto.getBirthDate());
-        if (dto.getRegistrationDate() != null) entity.setRegistrationDate(dto.getRegistrationDate());
-        if (registeredBy != null && registeredBy.getId() != null) {
-            entity.setRegisteredBy(registeredBy);
-        }
-    }
 }
