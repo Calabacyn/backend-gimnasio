@@ -33,10 +33,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public List<ClientDTO> getAll() {
-        return clientRepository.findAll()
-                .stream()
-                .map(clientMapper::toDto)
-                .collect(Collectors.toList());
+        return clientMapper.toListDto(clientRepository.findAll());
     }
 
     @Override
@@ -57,7 +54,6 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public void update(ClientDTO client) {
-
         Long clientId = Optional.ofNullable(client.getId())
                 .orElseThrow(ClientNotFoundException::new);
 
@@ -66,7 +62,7 @@ public class ClientServiceImpl implements IClientService {
                         .orElseThrow(() -> new UserNotFoundException(userId)))
                 .orElse(null);
 
-        Client existingClient = clientRepository.findById(client.getId())
+        Client existingClient = clientRepository.findById(clientId)
                 .orElseThrow(() -> new ClientNotFoundException(clientId));
 
         existingClient.updateFromDto(client, registeredBy);
