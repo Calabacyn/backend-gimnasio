@@ -10,4 +10,7 @@ public class ClientNotFoundException extends RuntimeException {
         super("Client not found with id: " + id);
     }
 
+    public ClientNotFoundException() {
+        super("Client not found");
+    }
 }

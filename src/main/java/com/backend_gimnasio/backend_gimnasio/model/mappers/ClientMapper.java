@@ -5,6 +5,9 @@ import com.backend_gimnasio.backend_gimnasio.model.entities.Client;
 import com.backend_gimnasio.backend_gimnasio.model.entities.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ClientMapper {
 
@@ -42,6 +45,14 @@ public class ClientMapper {
 
         return entity;
     }
+
+    public List<ClientDTO> toListDto(List<Client> clients) {
+        if (clients == null) return List.of();
+        return clients.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
 
 
 }

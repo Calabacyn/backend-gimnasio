@@ -20,16 +20,16 @@ public class ClientDTO {
 
     private Long id;
 
-    @NotBlank
+
     private String firstName;
 
-    @NotBlank
+
     private String lastName;
 
-    @NotBlank
+
     private String email;
 
-    @NotBlank
+
     private String nationalId;
 
     private String phone;
@@ -38,7 +38,7 @@ public class ClientDTO {
 
     private LocalDate registrationDate;
 
-    @NotNull
+
     private Long registeredById;
 
     private String registeredByName;

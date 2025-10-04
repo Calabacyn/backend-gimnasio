@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IClientService {
-    List<ClientDTO> getAllClients();
-    Optional<ClientDTO> getClientById(Long id);
-    ClientDTO createClient(ClientDTO clientDTO);
-    ClientDTO updateClient(Long id, ClientDTO clientDTO);
-    void deleteClient(Long id);
+    List<ClientDTO> getAll();
+    Optional<ClientDTO> getBy(Long id);
+    void create(ClientDTO clientDTO);
+    void update(ClientDTO clientDTO);
+    void delete(Long id);
 }

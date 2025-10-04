@@ -32,7 +32,7 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public List<ClientDTO> getAllClients() {
+    public List<ClientDTO> getAll() {
         return clientRepository.findAll()
                 .stream()
                 .map(clientMapper::toDto)
@@ -40,42 +40,43 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public Optional<ClientDTO> getClientById(Long id) {
+    public Optional<ClientDTO> getBy(Long id) {
         return clientRepository.findById(id).map(clientMapper::toDto);
     }
 
     @Override
-    public ClientDTO createClient(ClientDTO clientDTO) {
-        User registeredBy = userRepository.findById(clientDTO.getRegisteredById())
-                .orElseThrow(() -> new ClientNotFoundException(clientDTO.getRegisteredById()));
+    public void create(ClientDTO client) {
+        User registeredBy = userRepository.findById(client.getRegisteredById())
+                .orElseThrow(() -> new UserNotFoundException(client.getRegisteredById()));
 
-        Client client = clientMapper.toEntity(clientDTO, registeredBy);
-        client.setRegistrationDate(LocalDate.now());
+        Client entity = clientMapper.toEntity(client, registeredBy);
+        entity.setRegistrationDate(LocalDate.now());
 
-        return clientMapper.toDto(clientRepository.save(client));
+        clientRepository.save(entity);
     }
 
     @Override
-    public ClientDTO updateClient(Long id, ClientDTO clientDTO) {
+    public void update(ClientDTO client) {
 
-        User registeredBy = Optional.ofNullable(clientDTO.getRegisteredById())
+        Long clientId = Optional.ofNullable(client.getId())
+                .orElseThrow(ClientNotFoundException::new);
+
+        User registeredBy = Optional.ofNullable(client.getRegisteredById())
                 .map(userId -> userRepository.findById(userId)
                         .orElseThrow(() -> new UserNotFoundException(userId)))
                 .orElse(null);
 
+        Client existingClient = clientRepository.findById(client.getId())
+                .orElseThrow(() -> new ClientNotFoundException(clientId));
 
-        return clientRepository.findById(id)
-                .map(client -> {
-                    clientMapper.updateEntityFromDto(clientDTO, client, registeredBy);
-                    return clientMapper.toDto(clientRepository.save(client));
-                })
-                .orElseThrow(() -> new ClientNotFoundException(id));
+        existingClient.updateFromDto(client, registeredBy);
+
+        clientRepository.save(existingClient);
     }
 
 
-
     @Override
-    public void deleteClient(Long id) {
+    public void delete(Long id) {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(id));
         clientRepository.delete(client);

@@ -37,18 +37,17 @@ public class ClientController {
 
 
     @PostMapping
-    public ResponseEntity<ClientDTO> create(@RequestBody @Valid ClientDTO client) {
-
-        return clientService.create(client);
+    public ResponseEntity<Void> create(@RequestBody @Valid ClientDTO client) {
+        clientService.create(client);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Long id,
-                                            @RequestBody @Valid ClientDTO client) {
-        ClientDTO updated = clientService.update(id, client);
-        return ResponseEntity.ok(updated);
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Valid ClientDTO client) {
+        clientService.update(client);
     }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
