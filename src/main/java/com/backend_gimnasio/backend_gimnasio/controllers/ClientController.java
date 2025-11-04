@@ -28,10 +28,10 @@ public class ClientController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ClientDTO> getBy(@PathVariable Long id) {
-        ClientDTO client = clientService.getBy(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+    @GetMapping("/{email}")
+    public ResponseEntity<ClientDTO> getBy(@PathVariable String email) {
+        ClientDTO client = clientService.getBy(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
         return ResponseEntity.ok(client);
     }
 
@@ -49,9 +49,9 @@ public class ClientController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{email}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        clientService.delete(id);
+    public void delete(@PathVariable String email) {
+        clientService.delete(email);
     }
 }

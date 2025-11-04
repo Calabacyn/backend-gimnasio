@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface IClientService {
     List<ClientDTO> getAll();
-    Optional<ClientDTO> getBy(Long id);
+    Optional<ClientDTO> getBy(String email);
     void create(ClientDTO clientDTO);
     void update(ClientDTO clientDTO);
-    void delete(Long id);
+    void delete(String email);
 }

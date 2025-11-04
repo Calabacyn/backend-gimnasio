@@ -15,17 +15,14 @@ import java.time.LocalDate;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
-
-    @Column(nullable = false, unique = true, length = 150)
-    private String email;
 
     @Column(name = "national_id", nullable = false, unique = true, length = 20)
     private String nationalId;
@@ -42,11 +39,11 @@ public class Client {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)
-    private User registeredBy;
+    private User registeredByEmail;
 
 
 
-    public void updateFromDto(ClientDTO dto, User registeredBy) {
+    public void updateFromDto(ClientDTO dto, User registeredByEmail) {
         if (dto == null) return;
 
         if (dto.getFirstName() != null) this.setFirstName(dto.getFirstName());
@@ -56,8 +53,8 @@ public class Client {
         if (dto.getPhone() != null) this.setPhone(dto.getPhone());
         if (dto.getBirthDate() != null) this.setBirthDate(dto.getBirthDate());
         if (dto.getRegistrationDate() != null) this.setRegistrationDate(dto.getRegistrationDate());
-        if (registeredBy != null && registeredBy.getId() != null) {
-            this.setRegisteredBy(registeredBy);
+        if (registeredByEmail != null && registeredByEmail.getEmail() != null) {
+            this.setRegisteredByEmail(registeredByEmail);
         }
     }
 

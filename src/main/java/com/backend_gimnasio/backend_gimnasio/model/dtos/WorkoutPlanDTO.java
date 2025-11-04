@@ -24,8 +24,7 @@ public class WorkoutPlanDTO {
     private String description;
     private LocalDate creationDate;
     private Long membershipId;
-    private Long registeredBy;       // id del usuario staff
-    private String registeredByName; // opcional
+    private Long registeredByEmail;       // id del usuario staff
     private LocalDate expirationDate;
 }
 

@@ -1,6 +1,7 @@
 package com.backend_gimnasio.backend_gimnasio.services.impl;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
+import com.backend_gimnasio.backend_gimnasio.model.dtos.UserCreateDTO;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
 import com.backend_gimnasio.backend_gimnasio.model.entities.User;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.UserMapper;
@@ -11,59 +12,67 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                           UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTO> getAll() {
         return userRepository.findAll()
                 .stream()
-                .map(UserMapper::toDTO)
-                .collect(Collectors.toList());
+                .map(userMapper::toDTO)
+                .toList();
     }
 
     @Override
-    public Optional<UserDTO> getUserById(Long id) {
-        return userRepository.findById(id)
-                .map(UserMapper::toDTO);
-    }
-
-
-    @Override
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = UserMapper.toEntity(userDTO);
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-        return UserMapper.toDTO(userRepository.save(user));
+    public Optional<UserDTO> getBy(String email) {
+        return userRepository.findByEmail(email).map(userMapper::toDTO);
     }
 
     @Override
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
-        return userRepository.findById(id)
-                .map(user -> {
-                    user.setUserName(userDTO.getUserName());
-                    user.setEmail(userDTO.getEmail());
-                    user.setPassword(userDTO.getPassword());
-                    user.setStatus(userDTO.getStatus());
-                    user.setUpdatedAt(LocalDateTime.now());
-                    return UserMapper.toDTO(userRepository.save(user));
-                })
-                .orElseThrow(() -> new UserNotFoundException(id));
+    public void create(UserCreateDTO userDTO) {
+
+        if (userRepository.existsByEmail(userDTO.getEmail())) {
+            throw new RuntimeException("El email ya está registrado.");
+        }
+
+        User entity = userMapper.toEntity(userDTO);
+
+
+        userRepository.save(entity);
     }
 
     @Override
-    public void deleteUser(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+    public void update(UserDTO userDTO) {
+        String email = Optional.ofNullable(userDTO.getEmail())
+                .orElseThrow(UserNotFoundException::new);
+
+        User existingUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
+
+
+        existingUser.setUserName(userDTO.getUserName());
+        existingUser.setRoles(userDTO.getRoles());
+        existingUser.setStatus(userDTO.getStatus());
+        existingUser.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(existingUser);
+    }
+
+    @Override
+    public void delete(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
+
         userRepository.delete(user);
     }
-
 }

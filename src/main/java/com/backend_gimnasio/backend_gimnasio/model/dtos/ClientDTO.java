@@ -17,31 +17,14 @@ import java.time.LocalDate;
 @Builder
 public class ClientDTO {
 
-
-    private Long id;
-
-
     private String firstName;
-
-
     private String lastName;
-
-
     private String email;
-
-
     private String nationalId;
-
     private String phone;
-
     private LocalDate birthDate;
-
     private LocalDate registrationDate;
-
-
-    private Long registeredById;
-
-    private String registeredByName;
+    private String registeredByEmail;
 
 
 }

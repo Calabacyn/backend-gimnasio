@@ -13,17 +13,5 @@ import java.util.stream.Collectors;
 @Service
 public class WorkoutPlanServiceImpl implements IWorkoutPlanService {
 
-    private final WorkoutPlanRepository workoutPlanRepository;
 
-    public WorkoutPlanServiceImpl(WorkoutPlanRepository workoutPlanRepository) {
-        this.workoutPlanRepository = workoutPlanRepository;
-    }
-
-    @Override
-    public List<WorkoutPlanDTO> getAllWorkoutPlans() {
-        List<WorkoutPlan> plans = workoutPlanRepository.findAll();
-        return plans.stream()
-                .map(WorkoutPlanMapper::toDTO)
-                .collect(Collectors.toList());
-    }
 }

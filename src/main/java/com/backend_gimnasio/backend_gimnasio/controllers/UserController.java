@@ -1,15 +1,14 @@
 package com.backend_gimnasio.backend_gimnasio.controllers;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
+import com.backend_gimnasio.backend_gimnasio.model.dtos.UserCreateDTO;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
 import com.backend_gimnasio.backend_gimnasio.services.interfaces.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,46 +23,36 @@ public class UserController {
 
 
     @GetMapping
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserDTO> getAll() {
+        return userService.getAll();
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        UserDTO user = userService.getUserById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+    @GetMapping("/{email:.+}")
+    public ResponseEntity<UserDTO> getBy(@PathVariable String email) {
+        UserDTO user = userService.getBy(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
         return ResponseEntity.ok(user);
     }
 
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO user) {
-        UserDTO createdUser = userService.createUser(user);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdUser.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(createdUser);
+    public ResponseEntity<Void> create(@RequestBody @Valid UserCreateDTO user) {
+        userService.create(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
-
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserDTO userDetails) {
-        UserDTO updatedUser = userService.updateUser(id, userDetails);
-        return ResponseEntity.ok(updatedUser);
-    }
-
-
-
-    @DeleteMapping("/{id}")
+    @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public void update(@RequestBody @Valid UserDTO user) {
+        userService.update(user);
     }
 
+
+    @DeleteMapping("/{email}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable String email) {
+        userService.delete(email);
+    }
 }

@@ -1,5 +1,6 @@
 package com.backend_gimnasio.backend_gimnasio.model.entities;
 
+import com.backend_gimnasio.backend_gimnasio.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,20 +17,24 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
 
     @Column(name = "username", nullable = false, unique = true, length = 100)
     private String userName;
 
-    @Column(nullable = false, unique = true, length = 150)
-    private String email;
-
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_email"))
+    @Enumerated(EnumType.STRING)
+    private Set<RoleEnum> roles = new HashSet<>();
+
+
     @Column(nullable = false, length = 20)
-    private String status;   // active / inactive
+    private String status;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -38,11 +43,15 @@ public class User {
     private LocalDateTime updatedAt;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

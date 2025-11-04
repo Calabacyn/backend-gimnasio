@@ -10,14 +10,5 @@ import java.util.List;
 @RequestMapping("/api/workout-plans")
 public class WorkoutPlanController {
 
-    private final IWorkoutPlanService workoutPlanService;
 
-    public WorkoutPlanController(IWorkoutPlanService workoutPlanService) {
-        this.workoutPlanService = workoutPlanService;
-    }
-
-    @GetMapping
-    public List<WorkoutPlanDTO> getAllPlans() {
-        return workoutPlanService.getAllWorkoutPlans();
-    }
 }

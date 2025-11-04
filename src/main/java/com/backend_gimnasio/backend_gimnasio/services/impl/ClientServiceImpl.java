@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements IClientService {
@@ -37,14 +36,14 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    public Optional<ClientDTO> getBy(Long id) {
-        return clientRepository.findById(id).map(clientMapper::toDto);
+    public Optional<ClientDTO> getBy(String email) {
+        return clientRepository.findByEmail(email).map(clientMapper::toDto);
     }
 
     @Override
     public void create(ClientDTO client) {
-        User registeredBy = userRepository.findById(client.getRegisteredById())
-                .orElseThrow(() -> new UserNotFoundException(client.getRegisteredById()));
+        User registeredBy = userRepository.findByEmail(client.getRegisteredByEmail())
+                .orElseThrow(() -> new UserNotFoundException(client.getRegisteredByEmail()));
 
         Client entity = clientMapper.toEntity(client, registeredBy);
         entity.setRegistrationDate(LocalDate.now());
@@ -54,27 +53,26 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public void update(ClientDTO client) {
-        Long clientId = Optional.ofNullable(client.getId())
+        String email = Optional.ofNullable(client.getEmail())
                 .orElseThrow(ClientNotFoundException::new);
 
-        User registeredBy = Optional.ofNullable(client.getRegisteredById())
-                .map(userId -> userRepository.findById(userId)
-                        .orElseThrow(() -> new UserNotFoundException(userId)))
+        Client existingClient = clientRepository.findByEmail(email)
+                .orElseThrow(() -> new ClientNotFoundException(email));
+
+        User registeredBy = Optional.ofNullable(client.getRegisteredByEmail())
+                .map(userEmail -> userRepository.findByEmail(userEmail)
+                        .orElseThrow(() -> new UserNotFoundException(userEmail)))
                 .orElse(null);
 
-        Client existingClient = clientRepository.findById(clientId)
-                .orElseThrow(() -> new ClientNotFoundException(clientId));
-
         existingClient.updateFromDto(client, registeredBy);
-
         clientRepository.save(existingClient);
     }
 
-
     @Override
-    public void delete(Long id) {
-        Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException(id));
+    public void delete(String email) {
+        Client client = clientRepository.findByEmail(email)
+                .orElseThrow(() -> new ClientNotFoundException(email));
+
         clientRepository.delete(client);
     }
 }

@@ -15,7 +15,6 @@ public class ClientMapper {
         if (entity == null) return null;
 
         return ClientDTO.builder()
-                .id(entity.getId())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .email(entity.getEmail())
@@ -23,8 +22,8 @@ public class ClientMapper {
                 .phone(entity.getPhone())
                 .birthDate(entity.getBirthDate())
                 .registrationDate(entity.getRegistrationDate())
-                .registeredById(entity.getRegisteredBy() != null ? entity.getRegisteredBy().getId() : null)
-                .registeredByName(entity.getRegisteredBy() != null ? entity.getRegisteredBy().getUserName() : null)
+                .registeredByEmail(entity.getRegisteredByEmail() != null ? entity.getRegisteredByEmail().getEmail() : null)
+
                 .build();
     }
 
@@ -33,7 +32,6 @@ public class ClientMapper {
         if (dto == null) return null;
 
         Client entity = new Client();
-        entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
@@ -41,7 +39,7 @@ public class ClientMapper {
         entity.setPhone(dto.getPhone());
         entity.setBirthDate(dto.getBirthDate());
         entity.setRegistrationDate(dto.getRegistrationDate());
-        entity.setRegisteredBy(registeredBy);
+        entity.setRegisteredByEmail(registeredBy);
 
         return entity;
     }
