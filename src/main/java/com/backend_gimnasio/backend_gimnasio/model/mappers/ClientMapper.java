@@ -1,7 +1,7 @@
 package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ClientDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Client;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ClientEntity;
 import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class ClientMapper {
 
-    public ClientDTO toDto(Client entity) {
+    public ClientDTO toDto(ClientEntity entity) {
         if (entity == null) return null;
 
         return ClientDTO.builder()
@@ -28,10 +28,10 @@ public class ClientMapper {
     }
 
 
-    public Client toEntity(ClientDTO dto, UserEntity registeredBy) {
+    public ClientEntity toEntity(ClientDTO dto, UserEntity registeredBy) {
         if (dto == null) return null;
 
-        Client entity = new Client();
+        ClientEntity entity = new ClientEntity();
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
@@ -44,7 +44,7 @@ public class ClientMapper {
         return entity;
     }
 
-    public List<ClientDTO> toListDto(List<Client> clients) {
+    public List<ClientDTO> toListDto(List<ClientEntity> clients) {
         if (clients == null) return List.of();
         return clients.stream()
                 .map(this::toDto)

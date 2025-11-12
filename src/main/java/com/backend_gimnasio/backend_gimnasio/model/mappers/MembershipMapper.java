@@ -1,13 +1,13 @@
 package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.MembershipDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Membership;
+import com.backend_gimnasio.backend_gimnasio.model.entities.MembershipEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MembershipMapper {
 
-    public MembershipDTO toDTO(Membership membership) {
+    public MembershipDTO toDTO(MembershipEntity membership) {
         if (membership == null) return null;
 
         return MembershipDTO.builder()
@@ -20,10 +20,10 @@ public class MembershipMapper {
                 .build();
     }
 
-    public Membership toEntity(MembershipDTO dto) {
+    public MembershipEntity toEntity(MembershipDTO dto) {
         if (dto == null) return null;
 
-        return Membership.builder()
+        return MembershipEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .price(dto.getPrice())

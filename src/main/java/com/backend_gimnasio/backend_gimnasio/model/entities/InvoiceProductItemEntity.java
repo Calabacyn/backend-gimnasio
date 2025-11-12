@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InvoiceProductItem {
+public class InvoiceProductItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +20,11 @@ public class InvoiceProductItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id", nullable = false)
-    private Invoice invoice;
+    private InvoiceEntity invoice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    private ProductEntity product;
 
     @Column(nullable = false)
     private Integer quantity = 1;

@@ -2,7 +2,7 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.ProductCategoryNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProductCategoryDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategory;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategoryEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.ProductCategoryMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.ProductCategoryRepository;
 import com.backend_gimnasio.backend_gimnasio.services.interfaces.IProductCategoryService;
@@ -43,7 +43,7 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
             throw new RuntimeException("The category name already exists.");
         }
 
-        ProductCategory entity = productCategoryMapper.toEntity(dto);
+        ProductCategoryEntity entity = productCategoryMapper.toEntity(dto);
         productCategoryRepository.save(entity);
     }
 
@@ -52,7 +52,7 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
         Long id = Optional.ofNullable(dto.getId())
                 .orElseThrow(ProductCategoryNotFoundException::new);
 
-        ProductCategory existing = productCategoryRepository.findById(id)
+        ProductCategoryEntity existing = productCategoryRepository.findById(id)
                 .orElseThrow(() -> new ProductCategoryNotFoundException(id));
 
         // Verificar si el nuevo nombre ya está en uso por otra categoría
@@ -70,7 +70,7 @@ public class ProductCategoryServiceImpl implements IProductCategoryService {
 
     @Override
     public void delete(Long id) {
-        ProductCategory category = productCategoryRepository.findById(id)
+        ProductCategoryEntity category = productCategoryRepository.findById(id)
                 .orElseThrow(() -> new ProductCategoryNotFoundException(id));
 
         productCategoryRepository.delete(category);

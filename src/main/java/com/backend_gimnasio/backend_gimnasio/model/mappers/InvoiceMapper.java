@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class InvoiceMapper {
 
-    public InvoiceDTO toDTO(Invoice invoice) {
+    public InvoiceDTO toDTO(InvoiceEntity invoice) {
         if (invoice == null) return null;
 
         return InvoiceDTO.builder()
@@ -32,11 +32,11 @@ public class InvoiceMapper {
                 .build();
     }
 
-    public Invoice toEntity(InvoiceDTO dto, Client client, UserEntity registeredBy,
-                            List<InvoiceProductItem> productItems, List<InvoiceMembershipItem> membershipItems) {
+    public InvoiceEntity toEntity(InvoiceDTO dto, ClientEntity client, UserEntity registeredBy,
+                                  List<InvoiceProductItemEntity> productItems, List<InvoiceMembershipItemEntity> membershipItems) {
         if (dto == null) return null;
 
-        Invoice invoice = Invoice.builder()
+        InvoiceEntity invoice = InvoiceEntity.builder()
                 .id(dto.getId())
                 .number(dto.getNumber())
                 .type(dto.getType())
@@ -62,8 +62,8 @@ public class InvoiceMapper {
     }
 
     // Para update: mapea sobre entidad existente
-    public Invoice toEntity(InvoiceDTO dto, Invoice existing, Client client, UserEntity registeredBy,
-                            List<InvoiceProductItem> productItems, List<InvoiceMembershipItem> membershipItems) {
+    public InvoiceEntity toEntity(InvoiceDTO dto, InvoiceEntity existing, ClientEntity client, UserEntity registeredBy,
+                                  List<InvoiceProductItemEntity> productItems, List<InvoiceMembershipItemEntity> membershipItems) {
         if (dto == null || existing == null) return null;
 
         existing.setNumber(dto.getNumber());
@@ -88,7 +88,7 @@ public class InvoiceMapper {
         return existing;
     }
 
-    private InvoiceProductItemDTO toProductItemDTO(InvoiceProductItem item) {
+    private InvoiceProductItemDTO toProductItemDTO(InvoiceProductItemEntity item) {
         if (item == null) return null;
 
         return InvoiceProductItemDTO.builder()
@@ -100,7 +100,7 @@ public class InvoiceMapper {
                 .build();
     }
 
-    private InvoiceMembershipItemDTO toMembershipItemDTO(InvoiceMembershipItem item) {
+    private InvoiceMembershipItemDTO toMembershipItemDTO(InvoiceMembershipItemEntity item) {
         if (item == null) return null;
 
         return InvoiceMembershipItemDTO.builder()

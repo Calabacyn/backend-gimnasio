@@ -2,9 +2,9 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.ProductPurchaseNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProductPurchaseDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Product;
-import com.backend_gimnasio.backend_gimnasio.model.entities.ProductPurchase;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Provider;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductEntity;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductPurchaseEntity;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProviderEntity;
 import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.ProductPurchaseMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.ProductPurchaseRepository;
@@ -57,10 +57,10 @@ public class ProductPurchaseServiceImpl implements IProductPurchaseService {
     @Override
     @Transactional
     public void create(ProductPurchaseDTO productPurchaseDTO) {
-        Product product = productRepository.findById(productPurchaseDTO.getProductId())
+        ProductEntity product = productRepository.findById(productPurchaseDTO.getProductId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        Provider provider = providerRepository.findById(productPurchaseDTO.getProviderId())
+        ProviderEntity provider = providerRepository.findById(productPurchaseDTO.getProviderId())
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado"));
 
         UserEntity user = userRepository.findById(productPurchaseDTO.getRegisteredBy())
@@ -73,7 +73,7 @@ public class ProductPurchaseServiceImpl implements IProductPurchaseService {
         }
 
 
-        ProductPurchase purchase = productPurchaseMapper.toEntity(productPurchaseDTO, product, provider, user);
+        ProductPurchaseEntity purchase = productPurchaseMapper.toEntity(productPurchaseDTO, product, provider, user);
 
         productPurchaseRepository.save(purchase);
 
@@ -87,13 +87,13 @@ public class ProductPurchaseServiceImpl implements IProductPurchaseService {
         Long id = Optional.ofNullable(productPurchaseDTO.getId())
                 .orElseThrow(ProductPurchaseNotFoundException::new);
 
-        ProductPurchase existingPurchase = productPurchaseRepository.findById(id)
+        ProductPurchaseEntity existingPurchase = productPurchaseRepository.findById(id)
                 .orElseThrow(() -> new ProductPurchaseNotFoundException(id));
 
-        Product product = productRepository.findById(productPurchaseDTO.getProductId())
+        ProductEntity product = productRepository.findById(productPurchaseDTO.getProductId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-        Provider provider = providerRepository.findById(productPurchaseDTO.getProviderId())
+        ProviderEntity provider = providerRepository.findById(productPurchaseDTO.getProviderId())
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado"));
 
         UserEntity user = userRepository.findById(productPurchaseDTO.getRegisteredBy())
@@ -113,10 +113,10 @@ public class ProductPurchaseServiceImpl implements IProductPurchaseService {
     @Override
     @Transactional
     public void delete(Long id) {
-        ProductPurchase existingPurchase = productPurchaseRepository.findById(id)
+        ProductPurchaseEntity existingPurchase = productPurchaseRepository.findById(id)
                 .orElseThrow(() -> new ProductPurchaseNotFoundException(id));
 
-        Product product = existingPurchase.getProduct();
+        ProductEntity product = existingPurchase.getProduct();
         product.setStock(product.getStock() - existingPurchase.getQuantity());
         productRepository.save(product);
 

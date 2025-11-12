@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Product {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_category_id", nullable = false)
-    private ProductCategory productCategory;
+    private ProductCategoryEntity productCategory;
 
 
     @Column(nullable = false, length = 100, unique = true)

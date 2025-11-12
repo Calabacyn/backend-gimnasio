@@ -1,15 +1,15 @@
 package com.backend_gimnasio.backend_gimnasio.repositories;
 
-import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategory;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
+public interface ProductCategoryRepository extends JpaRepository<ProductCategoryEntity, Long> {
 
-    Optional<ProductCategory> findByName(String name);
+    Optional<ProductCategoryEntity> findByName(String name);
 
     boolean existsByName(String name);
 }

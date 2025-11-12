@@ -2,8 +2,8 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.ProductNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProductDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Product;
-import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategory;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductEntity;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategoryEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.ProductMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.ProductRepository;
 import com.backend_gimnasio.backend_gimnasio.repositories.ProductCategoryRepository;
@@ -47,10 +47,10 @@ public class ProductServiceImpl implements IProductService {
             throw new RuntimeException("El nombre del producto ya está registrado.");
         }
 
-        ProductCategory category = categoryRepository.findById(productDTO.getProductCategoryId())
+        ProductCategoryEntity category = categoryRepository.findById(productDTO.getProductCategoryId())
                 .orElseThrow(() -> new RuntimeException("La categoría indicada no existe."));
 
-        Product product = productMapper.toEntity(productDTO,null, category);
+        ProductEntity product = productMapper.toEntity(productDTO,null, category);
 
         productRepository.save(product);
     }
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements IProductService {
         Long id = Optional.ofNullable(productDTO.getId())
                 .orElseThrow(ProductNotFoundException::new);
 
-        Product existingProduct = productRepository.findById(id)
+        ProductEntity existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
 
         if (!existingProduct.getName().equalsIgnoreCase(productDTO.getName()) &&
@@ -69,17 +69,17 @@ public class ProductServiceImpl implements IProductService {
             throw new RuntimeException("El nombre del producto ya está registrado.");
         }
 
-        ProductCategory category = categoryRepository.findById(productDTO.getProductCategoryId())
+        ProductCategoryEntity category = categoryRepository.findById(productDTO.getProductCategoryId())
                 .orElseThrow(() -> new RuntimeException("La categoría indicada no existe."));
 
-        Product updatedProduct = productMapper.toEntity(productDTO, existingProduct, category);
+        ProductEntity updatedProduct = productMapper.toEntity(productDTO, existingProduct, category);
         productRepository.save(updatedProduct);
     }
 
 
     @Override
     public void delete(Long id) {
-        Product product = productRepository.findById(id)
+        ProductEntity product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
 
         productRepository.delete(product);

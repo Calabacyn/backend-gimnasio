@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product_purchases") // ya no uniqueConstraints
-public class ProductPurchase {
+public class ProductPurchaseEntity {
 
 
     @Id
@@ -42,11 +42,11 @@ public class ProductPurchase {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    private ProductEntity product;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", nullable = false)
-    private Provider provider;
+    private ProviderEntity provider;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)

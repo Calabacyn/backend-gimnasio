@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Membership {
+public class MembershipEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+public class ClientEntity {
 
     @Id
     @Column(nullable = false, unique = true, length = 150)

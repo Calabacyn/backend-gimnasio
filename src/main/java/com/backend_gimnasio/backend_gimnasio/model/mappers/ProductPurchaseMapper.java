@@ -1,9 +1,9 @@
 package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProductPurchaseDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Product;
-import com.backend_gimnasio.backend_gimnasio.model.entities.ProductPurchase;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Provider;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductEntity;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductPurchaseEntity;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProviderEntity;
 import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Component
 public class ProductPurchaseMapper {
 
-    public  ProductPurchaseDTO toDTO(ProductPurchase entity) {
+    public  ProductPurchaseDTO toDTO(ProductPurchaseEntity entity) {
         if (entity == null) return null;
         return ProductPurchaseDTO.builder()
                 .id(entity.getId())
@@ -27,9 +27,9 @@ public class ProductPurchaseMapper {
                 .build();
     }
 
-    public  ProductPurchase toEntity(ProductPurchaseDTO dto, Product product, Provider provider, UserEntity user) {
+    public ProductPurchaseEntity toEntity(ProductPurchaseDTO dto, ProductEntity product, ProviderEntity provider, UserEntity user) {
         if (dto == null) return null;
-        return ProductPurchase.builder()
+        return ProductPurchaseEntity.builder()
                 .purchaseDate(dto.getPurchaseDate())
                 .quantity(dto.getQuantity())
                 .unitCost(dto.getUnitCost())
@@ -43,8 +43,8 @@ public class ProductPurchaseMapper {
     }
 
 
-    public void updateEntityFromDTO(ProductPurchaseDTO dto, ProductPurchase entity,
-                                           Product product, Provider provider, UserEntity user) {
+    public void updateEntityFromDTO(ProductPurchaseDTO dto, ProductPurchaseEntity entity,
+                                    ProductEntity product, ProviderEntity provider, UserEntity user) {
         entity.setPurchaseDate(dto.getPurchaseDate());
         entity.setQuantity(dto.getQuantity());
         entity.setUnitCost(dto.getUnitCost());

@@ -1,14 +1,13 @@
 package com.backend_gimnasio.backend_gimnasio.repositories;
 
-import aj.org.objectweb.asm.commons.Remapper;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Client;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ClientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, String> {
-    Optional<Client> findByEmail(String email);
+public interface ClientRepository extends JpaRepository<ClientEntity, String> {
+    Optional<ClientEntity> findByEmail(String email);
 
 }

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkoutPlan {
+public class WorkoutPlanEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class WorkoutPlan {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    private ClientEntity client;
 
     private String title;
     private String link;

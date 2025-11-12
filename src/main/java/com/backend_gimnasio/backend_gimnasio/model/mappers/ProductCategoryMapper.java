@@ -1,13 +1,13 @@
 package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProductCategoryDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategory;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProductCategoryEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductCategoryMapper {
 
-    public ProductCategoryDTO toDTO(ProductCategory category) {
+    public ProductCategoryDTO toDTO(ProductCategoryEntity category) {
         if (category == null) return null;
 
         return ProductCategoryDTO.builder()
@@ -17,10 +17,10 @@ public class ProductCategoryMapper {
                 .build();
     }
 
-    public ProductCategory toEntity(ProductCategoryDTO dto) {
+    public ProductCategoryEntity toEntity(ProductCategoryDTO dto) {
         if (dto == null) return null;
 
-        ProductCategory category = new ProductCategory();
+        ProductCategoryEntity category = new ProductCategoryEntity();
         category.setId(dto.getId());
         category.setName(dto.getName());
         category.setDescription(dto.getDescription());

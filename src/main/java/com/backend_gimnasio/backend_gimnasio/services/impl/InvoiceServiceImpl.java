@@ -63,7 +63,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
             throw new RuntimeException("Invoice number already exists: " + invoiceDTO.getNumber());
         }
 
-        Client client = null;
+        ClientEntity client = null;
         if (invoiceDTO.getClientEmail() != null) {
             client = clientRepository.findById(invoiceDTO.getClientEmail())
                     .orElseThrow(() -> new ClientNotFoundException(invoiceDTO.getClientEmail()));
@@ -72,12 +72,12 @@ public class InvoiceServiceImpl implements IInvoiceService {
         UserEntity registeredBy = userRepository.findById(invoiceDTO.getRegisteredByEmail())
                 .orElseThrow(() -> new UserNotFoundException(invoiceDTO.getRegisteredByEmail()));
 
-        List<InvoiceProductItem> productItems = invoiceDTO.getProductItems() != null ?
+        List<InvoiceProductItemEntity> productItems = invoiceDTO.getProductItems() != null ?
                 invoiceDTO.getProductItems().stream()
                         .map(itemDTO -> {
-                            Product product = productRepository.findById(itemDTO.getProductId())
+                            ProductEntity product = productRepository.findById(itemDTO.getProductId())
                                     .orElseThrow(() -> new ProductNotFoundException(itemDTO.getProductId()));
-                            return InvoiceProductItem.builder()
+                            return InvoiceProductItemEntity.builder()
                                     .product(product)
                                     .quantity(itemDTO.getQuantity())
                                     .unitPrice(itemDTO.getUnitPrice())
@@ -85,14 +85,14 @@ public class InvoiceServiceImpl implements IInvoiceService {
                                     .build();
                         }).toList() : List.of();
 
-        List<InvoiceMembershipItem> membershipItems = invoiceDTO.getMembershipItems() != null ?
+        List<InvoiceMembershipItemEntity> membershipItems = invoiceDTO.getMembershipItems() != null ?
                 invoiceDTO.getMembershipItems().stream()
                         .map(itemDTO -> {
-                            Membership membership = membershipRepository.findById(itemDTO.getMembershipId())
+                            MembershipEntity membership = membershipRepository.findById(itemDTO.getMembershipId())
                                     .orElseThrow(() -> new MembershipNotFoundException(itemDTO.getMembershipId()));
                             LocalDate expirationDate = itemDTO.getExpirationDate() != null ? itemDTO.getExpirationDate()
                                     : LocalDate.now().plusMonths(membership.getDurationMonths() != null ? membership.getDurationMonths() : 0);
-                            Client itemClient;
+                            ClientEntity itemClient;
                             if (itemDTO.getClientEmail() != null) {
                                 itemClient = clientRepository.findById(itemDTO.getClientEmail())
                                         .orElseThrow(() -> new ClientNotFoundException(itemDTO.getClientEmail()));
@@ -103,7 +103,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
                                 itemClient = null;
                             }
 
-                            return InvoiceMembershipItem.builder()
+                            return InvoiceMembershipItemEntity.builder()
                                     .membership(membership)
                                     .client(itemClient)
                                     .price(itemDTO.getPrice())
@@ -114,7 +114,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
 
         BigDecimal calculatedTotal = calculateTotal(productItems, membershipItems);
 
-        Invoice invoice = invoiceMapper.toEntity(invoiceDTO, client, registeredBy, productItems, membershipItems);
+        InvoiceEntity invoice = invoiceMapper.toEntity(invoiceDTO, client, registeredBy, productItems, membershipItems);
         invoice.setTotal(calculatedTotal);
         invoiceRepository.save(invoice);
     }
@@ -125,7 +125,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
         Long id = Optional.ofNullable(invoiceDTO.getId())
                 .orElseThrow(InvoiceNotFoundException::new);
 
-        Invoice existingInvoice = invoiceRepository.findById(id)
+        InvoiceEntity existingInvoice = invoiceRepository.findById(id)
                 .orElseThrow(() -> new InvoiceNotFoundException(id));
 
         if (!existingInvoice.getNumber().equals(invoiceDTO.getNumber()) &&
@@ -133,7 +133,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
             throw new RuntimeException("Invoice number already exists: " + invoiceDTO.getNumber());
         }
 
-        Client client = null;
+        ClientEntity client = null;
         if (invoiceDTO.getClientEmail() != null) {
             client = clientRepository.findById(invoiceDTO.getClientEmail())
                     .orElseThrow(() -> new ClientNotFoundException(invoiceDTO.getClientEmail()));
@@ -142,12 +142,12 @@ public class InvoiceServiceImpl implements IInvoiceService {
         UserEntity registeredBy = userRepository.findById(invoiceDTO.getRegisteredByEmail())
                 .orElseThrow(() -> new UserNotFoundException(invoiceDTO.getRegisteredByEmail()));
 
-        List<InvoiceProductItem> productItems = invoiceDTO.getProductItems() != null ?
+        List<InvoiceProductItemEntity> productItems = invoiceDTO.getProductItems() != null ?
                 invoiceDTO.getProductItems().stream()
                         .map(itemDTO -> {
-                            Product product = productRepository.findById(itemDTO.getProductId())
+                            ProductEntity product = productRepository.findById(itemDTO.getProductId())
                                     .orElseThrow(() -> new ProductNotFoundException(itemDTO.getProductId()));
-                            return InvoiceProductItem.builder()
+                            return InvoiceProductItemEntity.builder()
                                     .product(product)
                                     .quantity(itemDTO.getQuantity())
                                     .unitPrice(itemDTO.getUnitPrice())
@@ -155,14 +155,14 @@ public class InvoiceServiceImpl implements IInvoiceService {
                                     .build();
                         }).toList() : List.of();
 
-        List<InvoiceMembershipItem> membershipItems = invoiceDTO.getMembershipItems() != null ?
+        List<InvoiceMembershipItemEntity> membershipItems = invoiceDTO.getMembershipItems() != null ?
                 invoiceDTO.getMembershipItems().stream()
                         .map(itemDTO -> {
-                            Membership membership = membershipRepository.findById(itemDTO.getMembershipId())
+                            MembershipEntity membership = membershipRepository.findById(itemDTO.getMembershipId())
                                     .orElseThrow(() -> new MembershipNotFoundException(itemDTO.getMembershipId()));
                             LocalDate expirationDate = itemDTO.getExpirationDate() != null ? itemDTO.getExpirationDate()
                                     : LocalDate.now().plusMonths(membership.getDurationMonths() != null ? membership.getDurationMonths() : 0);
-                            Client itemClient;
+                            ClientEntity itemClient;
                             if (itemDTO.getClientEmail() != null) {
                                 itemClient = clientRepository.findById(itemDTO.getClientEmail())
                                         .orElseThrow(() -> new ClientNotFoundException(itemDTO.getClientEmail()));
@@ -173,7 +173,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
                                 itemClient = null;
                             }
 
-                            return InvoiceMembershipItem.builder()
+                            return InvoiceMembershipItemEntity.builder()
                                     .membership(membership)
                                     .client(itemClient)
                                     .price(itemDTO.getPrice())
@@ -184,7 +184,7 @@ public class InvoiceServiceImpl implements IInvoiceService {
 
         BigDecimal calculatedTotal = calculateTotal(productItems, membershipItems);
 
-        Invoice updatedInvoice = invoiceMapper.toEntity(invoiceDTO, existingInvoice, client, registeredBy, productItems, membershipItems);
+        InvoiceEntity updatedInvoice = invoiceMapper.toEntity(invoiceDTO, existingInvoice, client, registeredBy, productItems, membershipItems);
         updatedInvoice.setTotal(calculatedTotal);
         invoiceRepository.save(updatedInvoice);
     }
@@ -192,16 +192,16 @@ public class InvoiceServiceImpl implements IInvoiceService {
     @Override
     @Transactional
     public void delete(Long id) {
-        Invoice invoice = invoiceRepository.findById(id)
+        InvoiceEntity invoice = invoiceRepository.findById(id)
                 .orElseThrow(() -> new InvoiceNotFoundException(id));
 
         invoiceRepository.delete(invoice);
     }
 
 
-    private BigDecimal calculateTotal(List<InvoiceProductItem> productItems, List<InvoiceMembershipItem> membershipItems) {
+    private BigDecimal calculateTotal(List<InvoiceProductItemEntity> productItems, List<InvoiceMembershipItemEntity> membershipItems) {
         BigDecimal productTotal = productItems.stream()
-                .map(InvoiceProductItem::getSubtotal)
+                .map(InvoiceProductItemEntity::getSubtotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal membershipTotal = membershipItems.stream()

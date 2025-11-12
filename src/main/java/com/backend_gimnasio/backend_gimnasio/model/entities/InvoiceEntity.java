@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Invoice {
+public class InvoiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Invoice {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_email")
-    private Client client;
+    private ClientEntity client;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
@@ -54,10 +54,10 @@ public class Invoice {
     private UserEntity registeredBy;
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InvoiceProductItem> productItems = new ArrayList<>();
+    private List<InvoiceProductItemEntity> productItems = new ArrayList<>();
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InvoiceMembershipItem> membershipItems = new ArrayList<>();
+    private List<InvoiceMembershipItemEntity> membershipItems = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {

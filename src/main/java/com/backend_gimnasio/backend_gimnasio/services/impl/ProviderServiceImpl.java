@@ -2,7 +2,7 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.ProviderNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProviderDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Provider;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProviderEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.ProviderMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.ProviderRepository;
 import com.backend_gimnasio.backend_gimnasio.services.interfaces.IProviderService;
@@ -47,7 +47,7 @@ public class ProviderServiceImpl implements IProviderService {
         }
 
 
-        Provider provider = providerMapper.toEntity(providerDTO);
+        ProviderEntity provider = providerMapper.toEntity(providerDTO);
         providerRepository.save(provider);
     }
 
@@ -56,7 +56,7 @@ public class ProviderServiceImpl implements IProviderService {
         Long id = Optional.ofNullable(providerDTO.getId())
                 .orElseThrow(ProviderNotFoundException::new);
 
-        Provider existingProvider = providerRepository.findById(id)
+        ProviderEntity existingProvider = providerRepository.findById(id)
                 .orElseThrow(() -> new ProviderNotFoundException(id));
 
 
@@ -77,7 +77,7 @@ public class ProviderServiceImpl implements IProviderService {
 
     @Override
     public void delete(Long id) {
-        Provider existingProvider = providerRepository.findById(id)
+        ProviderEntity existingProvider = providerRepository.findById(id)
                 .orElseThrow(() -> new ProviderNotFoundException(id));
 
         providerRepository.delete(existingProvider);

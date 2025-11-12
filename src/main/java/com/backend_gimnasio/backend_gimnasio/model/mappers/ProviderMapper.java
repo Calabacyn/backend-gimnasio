@@ -1,13 +1,13 @@
 package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ProviderDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Provider;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ProviderEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProviderMapper {
 
-    public ProviderDTO toDTO(Provider provider) {
+    public ProviderDTO toDTO(ProviderEntity provider) {
         if (provider == null) return null;
 
         return ProviderDTO.builder()
@@ -20,10 +20,10 @@ public class ProviderMapper {
                 .build();
     }
 
-    public Provider toEntity(ProviderDTO dto) {
+    public ProviderEntity toEntity(ProviderDTO dto) {
         if (dto == null) return null;
 
-        return Provider.builder()
+        return ProviderEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .email(dto.getEmail())
@@ -33,7 +33,7 @@ public class ProviderMapper {
                 .build();
     }
 
-    public void updateEntityFromDTO(ProviderDTO dto, Provider entity) {
+    public void updateEntityFromDTO(ProviderDTO dto, ProviderEntity entity) {
         if (dto == null || entity == null) return;
 
         entity.setName(dto.getName());

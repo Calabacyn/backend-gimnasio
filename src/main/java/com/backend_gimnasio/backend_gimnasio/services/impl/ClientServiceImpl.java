@@ -3,7 +3,7 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 import com.backend_gimnasio.backend_gimnasio.exceptions.ClientNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ClientDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Client;
+import com.backend_gimnasio.backend_gimnasio.model.entities.ClientEntity;
 import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.ClientMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.ClientRepository;
@@ -45,7 +45,7 @@ public class ClientServiceImpl implements IClientService {
         UserEntity registeredBy = userRepository.findByEmail(client.getRegisteredByEmail())
                 .orElseThrow(() -> new UserNotFoundException(client.getRegisteredByEmail()));
 
-        Client entity = clientMapper.toEntity(client, registeredBy);
+        ClientEntity entity = clientMapper.toEntity(client, registeredBy);
         entity.setRegistrationDate(LocalDate.now());
 
         clientRepository.save(entity);
@@ -56,7 +56,7 @@ public class ClientServiceImpl implements IClientService {
         String email = Optional.ofNullable(client.getEmail())
                 .orElseThrow(ClientNotFoundException::new);
 
-        Client existingClient = clientRepository.findByEmail(email)
+        ClientEntity existingClient = clientRepository.findByEmail(email)
                 .orElseThrow(() -> new ClientNotFoundException(email));
 
         UserEntity registeredBy = Optional.ofNullable(client.getRegisteredByEmail())
@@ -70,7 +70,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public void delete(String email) {
-        Client client = clientRepository.findByEmail(email)
+        ClientEntity client = clientRepository.findByEmail(email)
                 .orElseThrow(() -> new ClientNotFoundException(email));
 
         clientRepository.delete(client);

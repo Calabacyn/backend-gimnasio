@@ -1,9 +1,9 @@
 package com.backend_gimnasio.backend_gimnasio.repositories;
 
-import com.backend_gimnasio.backend_gimnasio.model.entities.Membership;
+import com.backend_gimnasio.backend_gimnasio.model.entities.MembershipEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MembershipRepository extends JpaRepository<Membership, Long> {
+public interface MembershipRepository extends JpaRepository<MembershipEntity, Long> {
 
     boolean existsByNameIgnoreCase(String name);
 

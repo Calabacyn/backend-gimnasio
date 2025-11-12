@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InvoiceMembershipItem {
+public class InvoiceMembershipItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,15 +21,15 @@ public class InvoiceMembershipItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id", nullable = false)
-    private Invoice invoice;
+    private InvoiceEntity invoice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "membership_id", nullable = false)
-    private Membership membership;
+    private MembershipEntity membership;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_email")
-    private Client client;
+    private ClientEntity client;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;

@@ -2,7 +2,7 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 
 import com.backend_gimnasio.backend_gimnasio.exceptions.MembershipNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.MembershipDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.Membership;
+import com.backend_gimnasio.backend_gimnasio.model.entities.MembershipEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.MembershipMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.MembershipRepository;
 import com.backend_gimnasio.backend_gimnasio.services.interfaces.IMembershipService;
@@ -43,7 +43,7 @@ public class MembershipServiceImpl implements IMembershipService {
             throw new RuntimeException("Membership name already exists.");
         }
 
-        Membership entity = membershipMapper.toEntity(membershipDTO);
+        MembershipEntity entity = membershipMapper.toEntity(membershipDTO);
         membershipRepository.save(entity);
     }
 
@@ -52,7 +52,7 @@ public class MembershipServiceImpl implements IMembershipService {
         Long id = Optional.ofNullable(membershipDTO.getId())
                 .orElseThrow(MembershipNotFoundException::new);
 
-        Membership existingMembership = membershipRepository.findById(id)
+        MembershipEntity existingMembership = membershipRepository.findById(id)
                 .orElseThrow(() -> new MembershipNotFoundException(id));
 
 
@@ -71,7 +71,7 @@ public class MembershipServiceImpl implements IMembershipService {
 
     @Override
     public void delete(Long id) {
-        Membership membership = membershipRepository.findById(id)
+        MembershipEntity membership = membershipRepository.findById(id)
                 .orElseThrow(() -> new MembershipNotFoundException(id));
 
         membershipRepository.delete(membership);
