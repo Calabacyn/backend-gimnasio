@@ -4,7 +4,7 @@ import com.backend_gimnasio.backend_gimnasio.exceptions.ClientNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ClientDTO;
 import com.backend_gimnasio.backend_gimnasio.model.entities.Client;
-import com.backend_gimnasio.backend_gimnasio.model.entities.User;
+import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.ClientMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.ClientRepository;
 import com.backend_gimnasio.backend_gimnasio.repositories.UserRepository;
@@ -42,7 +42,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public void create(ClientDTO client) {
-        User registeredBy = userRepository.findByEmail(client.getRegisteredByEmail())
+        UserEntity registeredBy = userRepository.findByEmail(client.getRegisteredByEmail())
                 .orElseThrow(() -> new UserNotFoundException(client.getRegisteredByEmail()));
 
         Client entity = clientMapper.toEntity(client, registeredBy);
@@ -59,7 +59,7 @@ public class ClientServiceImpl implements IClientService {
         Client existingClient = clientRepository.findByEmail(email)
                 .orElseThrow(() -> new ClientNotFoundException(email));
 
-        User registeredBy = Optional.ofNullable(client.getRegisteredByEmail())
+        UserEntity registeredBy = Optional.ofNullable(client.getRegisteredByEmail())
                 .map(userEmail -> userRepository.findByEmail(userEmail)
                         .orElseThrow(() -> new UserNotFoundException(userEmail)))
                 .orElse(null);

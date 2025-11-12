@@ -14,8 +14,14 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
 
-    @ExceptionHandler({UserNotFoundException.class, ClientNotFoundException.class, SupplierNotFoundException.class})
+    @ExceptionHandler({
+            UserNotFoundException.class,
+            ClientNotFoundException.class,
+
+            ResourceNotFoundException.class
+    })
     public ResponseEntity<Map<String, Object>> handleNotFound(RuntimeException ex) {
+
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.NOT_FOUND.value());

@@ -3,7 +3,7 @@ package com.backend_gimnasio.backend_gimnasio.services.impl;
 import com.backend_gimnasio.backend_gimnasio.exceptions.UserNotFoundException;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserCreateDTO;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.User;
+import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import com.backend_gimnasio.backend_gimnasio.model.mappers.UserMapper;
 import com.backend_gimnasio.backend_gimnasio.repositories.UserRepository;
 import com.backend_gimnasio.backend_gimnasio.services.interfaces.IUserService;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements IUserService {
             throw new RuntimeException("El email ya está registrado.");
         }
 
-        User entity = userMapper.toEntity(userDTO);
+        UserEntity entity = userMapper.toEntity(userDTO);
 
 
         userRepository.save(entity);
@@ -56,7 +56,7 @@ public class UserServiceImpl implements IUserService {
         String email = Optional.ofNullable(userDTO.getEmail())
                 .orElseThrow(UserNotFoundException::new);
 
-        User existingUser = userRepository.findByEmail(email)
+        UserEntity existingUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException(email));
 
 
@@ -70,7 +70,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void delete(String email) {
-        User user = userRepository.findByEmail(email)
+        UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException(email));
 
         userRepository.delete(user);

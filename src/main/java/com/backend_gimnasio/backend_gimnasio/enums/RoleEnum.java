@@ -4,14 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum RoleEnum {
-    ADMIN("Administrador"),
-    TRAINER("Entrenador"),
-    CLIENT("Cliente"),
-    STAFF("Personal");
+    ADMIN,
+    CLIENT,
+    PUBLIC,
+    STAFF;
 
-    private final String displayName;
 
-    RoleEnum(String displayName) {
-        this.displayName = displayName;
-    }
 }

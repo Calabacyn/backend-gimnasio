@@ -1,32 +1,54 @@
 package com.backend_gimnasio.backend_gimnasio.model.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.backend_gimnasio.backend_gimnasio.enums.InvoiceStatusEnum;
+import com.backend_gimnasio.backend_gimnasio.enums.InvoiceTypeEnum;
+import com.backend_gimnasio.backend_gimnasio.enums.PaymentMethodEnum;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * DTO for transferring invoice data.
- * Represents a sale invoice (type A or C) and contains its general info.
- */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class InvoiceDTO {
 
-    private Long idInvoice;
-    private String type;           // "A" or "C"
-    private LocalDate date;
-    private String cuit;           // tax ID
-    private Long client;         // optional if client exists
-    private BigDecimal totalAmount;
-    private String paymentMethod;
-    private Long registeredBy;
+    @Null(groups = InvoiceDTO.Create.class)
+    @NotNull(groups = InvoiceDTO.Update.class)
+    private Long id;
 
-    private List<InvoiceItemDTO> items; // list of items sold in this invoice
+    @NotBlank
+    @Size(max = 50)
+    private String number;
+
+    @NotNull
+    private InvoiceTypeEnum type;
+
+    private LocalDateTime date;
+
+    private String clientEmail;
+
+    @NotNull
+    @DecimalMin("0.00")
+    private BigDecimal total;  // Calculado en servicio desde ítems
+
+    @NotNull
+    private InvoiceStatusEnum status = InvoiceStatusEnum.PENDING;
+
+    private PaymentMethodEnum paymentMethod;
+
+    @NotBlank
+    private String registeredByEmail;
+
+    private List<InvoiceProductItemDTO> productItems;  // Opcional, lista vacía si no hay
+
+    private List<InvoiceMembershipItemDTO> membershipItems;  // Opcional, lista vacía si no hay
+
+    // Grupos para validación condicional
+    public interface Create {}
+    public interface Update {}
 }

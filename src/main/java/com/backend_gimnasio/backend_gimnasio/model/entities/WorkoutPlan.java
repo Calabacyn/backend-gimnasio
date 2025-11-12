@@ -34,7 +34,7 @@ public class WorkoutPlan {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)
-    private User registeredBy;
+    private UserEntity registeredBy;
 
     private LocalDate expirationDate;
 }

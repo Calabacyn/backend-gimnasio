@@ -1,27 +1,30 @@
 package com.backend_gimnasio.backend_gimnasio.model.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
-/**
- * DTO for transferring product information.
- * Represents the main data of a product.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Builder
 public class ProductDTO {
 
-    private Long id;
+    private Long id; // Opcional: null en creación, valor en actualización
+
+    @NotBlank(message = "El nombre no puede estar vacío")
     private String name;
+
+    @NotNull(message = "Debe indicar la categoría")
+    private Long productCategoryId;
+
     private String description;
-    private BigDecimal price;
-    private LocalDate lastUpdated;
-    private Long categoryId;
+
+    @NotNull(message = "Debe indicar el precio de venta")
+    @Min(value = 0, message = "El precio no puede ser negativo")
+    private Double salePrice;
+
+    @NotNull(message = "Debe indicar el stock")
+    @Min(value = 0, message = "El stock no puede ser negativo")
+    private Integer stock;
 }

@@ -39,11 +39,11 @@ public class Client {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_by", nullable = false)
-    private User registeredByEmail;
+    private UserEntity registeredByEmail;
 
 
 
-    public void updateFromDto(ClientDTO dto, User registeredByEmail) {
+    public void updateFromDto(ClientDTO dto, UserEntity registeredByEmail) {
         if (dto == null) return;
 
         if (dto.getFirstName() != null) this.setFirstName(dto.getFirstName());

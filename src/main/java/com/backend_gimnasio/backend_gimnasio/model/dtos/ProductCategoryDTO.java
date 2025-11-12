@@ -1,21 +1,20 @@
 package com.backend_gimnasio.backend_gimnasio.model.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Data;
 
-/**
- * DTO for transferring product category information.
- * Represents the basic data of a product category.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Builder
 public class ProductCategoryDTO {
 
     private Long id;
+
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String name;
+
+    @Size(max = 255, message = "La descripción no puede tener más de 255 caracteres")
     private String description;
 }

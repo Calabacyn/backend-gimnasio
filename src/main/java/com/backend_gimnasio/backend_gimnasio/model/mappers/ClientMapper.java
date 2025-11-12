@@ -2,7 +2,7 @@ package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.ClientDTO;
 import com.backend_gimnasio.backend_gimnasio.model.entities.Client;
-import com.backend_gimnasio.backend_gimnasio.model.entities.User;
+import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class ClientMapper {
     }
 
 
-    public Client toEntity(ClientDTO dto, User registeredBy) {
+    public Client toEntity(ClientDTO dto, UserEntity registeredBy) {
         if (dto == null) return null;
 
         Client entity = new Client();

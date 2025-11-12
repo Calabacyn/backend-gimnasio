@@ -2,13 +2,13 @@ package com.backend_gimnasio.backend_gimnasio.model.mappers;
 
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserCreateDTO;
 import com.backend_gimnasio.backend_gimnasio.model.dtos.UserDTO;
-import com.backend_gimnasio.backend_gimnasio.model.entities.User;
+import com.backend_gimnasio.backend_gimnasio.model.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-    public UserDTO toDTO(User user) {
+    public UserDTO toDTO(UserEntity user) {
         if (user == null) return null;
 
         return UserDTO.builder()
@@ -21,10 +21,10 @@ public class UserMapper {
                 .build();
     }
 
-    public User toEntity(UserCreateDTO dto) {
+    public UserEntity toEntity(UserCreateDTO dto) {
         if (dto == null) return null;
 
-        User user = new User();
+        UserEntity user = new UserEntity();
         user.setUserName(dto.getUserName());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
