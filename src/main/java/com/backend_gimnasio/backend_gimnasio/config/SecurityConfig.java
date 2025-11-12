@@ -108,7 +108,7 @@ public class SecurityConfig {
                                 //.requestMatchers("/memberships/**").hasAnyRole(RoleEnum.CLIENT.name(), RoleEnum.STAFF.name(), RoleEnum.ADMIN.name())
 
 
-                                .requestMatchers("/invoices/**").hasAnyRole(RoleEnum.CLIENT.name(), RoleEnum.STAFF.name(), RoleEnum.ADMIN.name())
+                                //.requestMatchers("/invoices").hasAnyRole(RoleEnum.CLIENT.name(), RoleEnum.STAFF.name(), RoleEnum.ADMIN.name())
 
 
                         //.requestMatchers("/products/**").hasAnyRole(RoleEnum.STAFF.name(), RoleEnum.ADMIN.name())
