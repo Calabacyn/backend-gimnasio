@@ -1,26 +1,26 @@
 package com.backend_gimnasio.backend_gimnasio.model.dtos;
 
+import com.backend_gimnasio.backend_gimnasio.enums.MembershipTypeEnum;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.math.BigDecimal;
-
-/**
- * DTO for transferring membership information.
- * Represents the main data of a gym membership plan.
- */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MembershipDTO {
 
     private Long id;
+
     private String name;
-    private String type;
-    private BigDecimal price;
-    private String description;
+
+    private Double price;
+
+    private MembershipTypeEnum membershipType;
+
     private Integer durationDays;
+
+    private String description;
 }

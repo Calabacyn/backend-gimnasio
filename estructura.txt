@@ -16,6 +16,7 @@ C:.
 |       jarRepositories.xml
 |       misc.xml
 |       vcs.xml
+|       workspace.xml
 |       
 +---.mvn
 |   \---wrapper
@@ -29,15 +30,110 @@ C:.
 |   |   |           \---backend_gimnasio
 |   |   |               |   BackendGimnasioApplication.java
 |   |   |               |   
+|   |   |               +---config
+|   |   |               |       SecurityConfig.java
+|   |   |               |       
 |   |   |               +---controllers
+|   |   |               |       ClientController.java
+|   |   |               |       InvoiceController.java
+|   |   |               |       MembershipController.java
+|   |   |               |       ProductCategoryController.java
+|   |   |               |       ProductController.java
+|   |   |               |       ProductPurchaseController.java
+|   |   |               |       ProviderController.java
+|   |   |               |       UserController.java
+|   |   |               |       
+|   |   |               +---enums
+|   |   |               |       InvoiceStatusEnum.java
+|   |   |               |       InvoiceTypeEnum.java
+|   |   |               |       MembershipTypeEnum.java
+|   |   |               |       PaymentMethodEnum.java
+|   |   |               |       RoleEnum.java
+|   |   |               |       
+|   |   |               +---exceptions
+|   |   |               |       ClientNotFoundException.java
+|   |   |               |       GlobalExceptionHandler.java
+|   |   |               |       InvoiceNotFoundException.java
+|   |   |               |       MembershipNotFoundException.java
+|   |   |               |       ProductCategoryNotFoundException.java
+|   |   |               |       ProductNotFoundException.java
+|   |   |               |       ProductPurchaseNotFoundException.java
+|   |   |               |       ProviderNotFoundException.java
+|   |   |               |       ResourceNotFoundException.java
+|   |   |               |       UserNotFoundException.java
+|   |   |               |       
 |   |   |               +---model
 |   |   |               |   +---dtos
+|   |   |               |   |       AuthResponseDTO.java
+|   |   |               |   |       ClientDTO.java
+|   |   |               |   |       InvoiceDTO.java
+|   |   |               |   |       InvoiceMembershipItemDTO.java
+|   |   |               |   |       InvoiceProductItemDTO.java
+|   |   |               |   |       MembershipDTO.java
+|   |   |               |   |       ProductCategoryDTO.java
+|   |   |               |   |       ProductDTO.java
+|   |   |               |   |       ProductPurchaseDTO.java
+|   |   |               |   |       ProviderDTO.java
+|   |   |               |   |       TestDTO.java
+|   |   |               |   |       UserCreateDTO.java
+|   |   |               |   |       UserDTO.java
+|   |   |               |   |       
 |   |   |               |   +---entities
+|   |   |               |   |       Client.java
+|   |   |               |   |       Invoice.java
+|   |   |               |   |       InvoiceMembershipItem.java
+|   |   |               |   |       InvoiceProductItem.java
+|   |   |               |   |       Membership.java
+|   |   |               |   |       Product.java
+|   |   |               |   |       ProductCategory.java
+|   |   |               |   |       ProductPurchase.java
+|   |   |               |   |       Provider.java
+|   |   |               |   |       UserEntity.java
+|   |   |               |   |       WorkoutPlan.java
+|   |   |               |   |       
 |   |   |               |   \---mappers
+|   |   |               |           ClientMapper.java
+|   |   |               |           InvoiceMapper.java
+|   |   |               |           MembershipMapper.java
+|   |   |               |           ProductCategoryMapper.java
+|   |   |               |           ProductMapper.java
+|   |   |               |           ProductPurchaseMapper.java
+|   |   |               |           ProviderMapper.java
+|   |   |               |           UserMapper.java
+|   |   |               |           
 |   |   |               +---repositories
+|   |   |               |       ClientRepository.java
+|   |   |               |       InvoiceRepository.java
+|   |   |               |       MembershipRepository.java
+|   |   |               |       ProductCategoryRepository.java
+|   |   |               |       ProductPurchaseRepository.java
+|   |   |               |       ProductRepository.java
+|   |   |               |       ProviderRepository.java
+|   |   |               |       UserRepository.java
+|   |   |               |       
 |   |   |               +---services
 |   |   |               |   +---impl
+|   |   |               |   |       AuthServiceImpl.java
+|   |   |               |   |       ClientServiceImpl.java
+|   |   |               |   |       InvoiceServiceImpl.java
+|   |   |               |   |       MembershipServiceImpl.java
+|   |   |               |   |       ProductCategoryServiceImpl.java
+|   |   |               |   |       ProductPurchaseServiceImpl.java
+|   |   |               |   |       ProductServiceImpl.java
+|   |   |               |   |       ProviderServiceImpl.java
+|   |   |               |   |       UserServiceImpl.java
+|   |   |               |   |       
 |   |   |               |   \---interfaces
+|   |   |               |           IAuthService.java
+|   |   |               |           IClientService.java
+|   |   |               |           IInvoiceService.java
+|   |   |               |           IMembershipService.java
+|   |   |               |           IProductCategoryService.java
+|   |   |               |           IProductPurchaseService.java
+|   |   |               |           IProductService.java
+|   |   |               |           IProviderService.java
+|   |   |               |           IUserService.java
+|   |   |               |           
 |   |   |               \---utils
 |   |   \---resources
 |   |       |   application.properties
@@ -60,7 +156,141 @@ C:.
     |   \---com
     |       \---backend_gimnasio
     |           \---backend_gimnasio
-    |                   BackendGimnasioApplication.class
+    |               |   BackendGimnasioApplication.class
+    |               |   
+    |               +---config
+    |               |       SecurityConfig.class
+    |               |       
+    |               +---controllers
+    |               |       ClientController.class
+    |               |       InvoiceController.class
+    |               |       MembershipController.class
+    |               |       ProductCategoryController.class
+    |               |       ProductController.class
+    |               |       ProductPurchaseController.class
+    |               |       ProviderController.class
+    |               |       UserController.class
+    |               |       
+    |               +---enums
+    |               |       InvoiceStatusEnum.class
+    |               |       InvoiceTypeEnum.class
+    |               |       MembershipTypeEnum.class
+    |               |       PaymentMethodEnum.class
+    |               |       RoleEnum.class
+    |               |       
+    |               +---exceptions
+    |               |       ClientNotFoundException.class
+    |               |       GlobalExceptionHandler.class
+    |               |       InvoiceNotFoundException.class
+    |               |       MembershipNotFoundException.class
+    |               |       ProductCategoryNotFoundException.class
+    |               |       ProductNotFoundException.class
+    |               |       ProductPurchaseNotFoundException.class
+    |               |       ProviderNotFoundException.class
+    |               |       ResourceNotFoundException.class
+    |               |       UserNotFoundException.class
+    |               |       
+    |               +---model
+    |               |   +---dtos
+    |               |   |       AuthResponseDTO$AuthResponseDTOBuilder.class
+    |               |   |       AuthResponseDTO.class
+    |               |   |       ClientDTO$ClientDTOBuilder.class
+    |               |   |       ClientDTO.class
+    |               |   |       InvoiceDTO$Create.class
+    |               |   |       InvoiceDTO$InvoiceDTOBuilder.class
+    |               |   |       InvoiceDTO$Update.class
+    |               |   |       InvoiceDTO.class
+    |               |   |       InvoiceMembershipItemDTO$InvoiceMembershipItemDTOBuilder.class
+    |               |   |       InvoiceMembershipItemDTO.class
+    |               |   |       InvoiceProductItemDTO$InvoiceProductItemDTOBuilder.class
+    |               |   |       InvoiceProductItemDTO.class
+    |               |   |       MembershipDTO$MembershipDTOBuilder.class
+    |               |   |       MembershipDTO.class
+    |               |   |       ProductCategoryDTO$ProductCategoryDTOBuilder.class
+    |               |   |       ProductCategoryDTO.class
+    |               |   |       ProductDTO$ProductDTOBuilder.class
+    |               |   |       ProductDTO.class
+    |               |   |       ProductPurchaseDTO$ProductPurchaseDTOBuilder.class
+    |               |   |       ProductPurchaseDTO.class
+    |               |   |       ProviderDTO$ProviderDTOBuilder.class
+    |               |   |       ProviderDTO.class
+    |               |   |       TestDTO$TestDTOBuilder.class
+    |               |   |       TestDTO.class
+    |               |   |       UserCreateDTO.class
+    |               |   |       UserDTO$UserDTOBuilder.class
+    |               |   |       UserDTO.class
+    |               |   |       
+    |               |   +---entities
+    |               |   |       Client.class
+    |               |   |       Invoice$InvoiceBuilder.class
+    |               |   |       Invoice.class
+    |               |   |       InvoiceMembershipItem$InvoiceMembershipItemBuilder.class
+    |               |   |       InvoiceMembershipItem.class
+    |               |   |       InvoiceProductItem$InvoiceProductItemBuilder.class
+    |               |   |       InvoiceProductItem.class
+    |               |   |       Membership$MembershipBuilder.class
+    |               |   |       Membership.class
+    |               |   |       Product$ProductBuilder.class
+    |               |   |       Product.class
+    |               |   |       ProductCategory$ProductCategoryBuilder.class
+    |               |   |       ProductCategory.class
+    |               |   |       ProductPurchase$ProductPurchaseBuilder.class
+    |               |   |       ProductPurchase.class
+    |               |   |       Provider$ProviderBuilder.class
+    |               |   |       Provider.class
+    |               |   |       UserEntity.class
+    |               |   |       WorkoutPlan.class
+    |               |   |       
+    |               |   \---mappers
+    |               |           ClientMapper.class
+    |               |           InvoiceMapper.class
+    |               |           MembershipMapper.class
+    |               |           ProductCategoryMapper.class
+    |               |           ProductMapper.class
+    |               |           ProductPurchaseMapper.class
+    |               |           ProviderMapper.class
+    |               |           UserMapper.class
+    |               |           
+    |               +---repositories
+    |               |       ClientRepository.class
+    |               |       InvoiceRepository.class
+    |               |       MembershipRepository.class
+    |               |       ProductCategoryRepository.class
+    |               |       ProductPurchaseRepository.class
+    |               |       ProductRepository.class
+    |               |       ProviderRepository.class
+    |               |       UserRepository.class
+    |               |       
+    |               \---services
+    |                   +---impl
+    |                   |       AuthServiceImpl.class
+    |                   |       ClientServiceImpl.class
+    |                   |       InvoiceServiceImpl.class
+    |                   |       MembershipServiceImpl.class
+    |                   |       ProductCategoryServiceImpl.class
+    |                   |       ProductPurchaseServiceImpl.class
+    |                   |       ProductServiceImpl.class
+    |                   |       ProviderServiceImpl.class
+    |                   |       UserServiceImpl.class
+    |                   |       
+    |                   \---interfaces
+    |                           IAuthService.class
+    |                           IClientService.class
+    |                           IInvoiceService.class
+    |                           IMembershipService.class
+    |                           IProductCategoryService.class
+    |                           IProductPurchaseService.class
+    |                           IProductService.class
+    |                           IProviderService.class
+    |                           IUserService.class
+    |                           
+    +---generated-sources
+    |   \---annotations
+    +---maven-status
+    |   \---maven-compiler-plugin
+    |       \---compile
+    |           \---default-compile
+    |                   createdFiles.lst
+    |                   inputFiles.lst
     |                   
-    \---generated-sources
-        \---annotations
+    \---test-classes
